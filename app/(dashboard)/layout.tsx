@@ -7,7 +7,7 @@ function layout({children}: {children:ReactNode}) {
       
       <Navbar />
       
-      <div className="w-full">
+      <div className=" w-full">
         {children}
       </div>
 
