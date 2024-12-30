@@ -15,6 +15,7 @@ import React from 'react'
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input"; // Adjust the import path based on your project structure
+import CategoryPicker from "@/app/(dashboard)/_components/CategoryPicker";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel } from "@/components/ui/form";
 
 function CreateTransactionDialog({trigger, type}: Props) {
@@ -83,7 +84,26 @@ function CreateTransactionDialog({trigger, type}: Props) {
                       )}
                     />
                     
-
+                    <div className="flex items-center justify-between
+                    gap-2">
+                        <FormField
+                    control={form.control}
+                    name="category"
+                    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                    render={({field}) => (
+                        <FormItem>
+                            <FormLabel>
+                                Category
+                            </FormLabel>
+                            <FormControl>
+                                <CategoryPicker type={type}/>
+                            </FormControl>
+                            <FormDescription>
+                                Select a catergory transaction.
+                            </FormDescription>
+                        </FormItem>
+                      )}
+                    /> </div>
 
             </form>
         </Form>
