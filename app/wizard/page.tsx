@@ -40,7 +40,7 @@ async function page() {
                     Currency
                 </CardTitle>
                 <CardDescription>
-                    Set your default currency.
+                    Set default currency.
                 </CardDescription>
             </CardHeader>
             <CardContent>
