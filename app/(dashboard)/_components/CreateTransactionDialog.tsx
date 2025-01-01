@@ -1,6 +1,7 @@
 "use client";
 
 import {  DialogContent, DialogTitle, Dialog, DialogHeader, DialogTrigger, DialogFooter, DialogClose } from "@/components/ui/dialog";
+import {  DialogContent, DialogTitle, Dialog, DialogHeader, DialogTrigger, DialogFooter, DialogClose } from "@/components/ui/dialog";
 import { TransactionType } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { CreateTransactionSchema, CreateTransactionSchemaType } from "@/schema/transaction";
@@ -141,6 +142,7 @@ const onSubmit = useCallback((values: CreateTransactionSchemaType) => {
                     />
                     
                     
+                    
                     <div className="flex items-center justify-between
                     gap-2">
                         <FormField
@@ -153,6 +155,9 @@ const onSubmit = useCallback((values: CreateTransactionSchemaType) => {
                                 Category
                             </FormLabel>
                             <FormControl>
+                                <CategoryPicker type={type} onChange={
+                                    handleCategoryChange
+                                }/>
                                 <CategoryPicker type={type} onChange={
                                     handleCategoryChange
                                 }/>
@@ -230,6 +235,26 @@ const onSubmit = useCallback((values: CreateTransactionSchemaType) => {
 
             </form>
         </Form>
+
+        <DialogFooter>
+        <DialogClose asChild>
+            <Button
+            type="button"
+            variant={"secondary"}
+            onClick={() => {
+                form.reset();
+            }}
+            >
+                Cancel
+            </Button>
+        </DialogClose>
+        <Button onClick={form.handleSubmit(onSubmit)}
+        disabled = {isPending}>
+            {!isPending && "Create"}
+            {isPending && <Loader2 className='animate-spin' />}
+        </Button>
+    </DialogFooter> 
+    
 
         <DialogFooter>
         <DialogClose asChild>
