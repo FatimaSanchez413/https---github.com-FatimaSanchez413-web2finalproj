@@ -18,13 +18,15 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Category } from '@prisma/client';
 import { toast } from 'sonner';
 import { CreateCategory } from '../_actions/categories';
+import { useTheme } from 'next-themes';
 
 
 interface Props {
     type: TransactionType;
+    successCallback: (category: Category) => void;
 }
 
-function CreateCategoryDialog({type}: Props) {
+function CreateCategoryDialog({type, successCallback}: Props) {
     const [open, setOpen] = useState(false);
 
     const form =useForm<CreateCategorySchemaType>({
@@ -35,6 +37,7 @@ function CreateCategoryDialog({type}: Props) {
     })
 
     const queryClient = useQueryClient();
+    const theme = useTheme();
 
      
     const {mutate, isPending} = useMutation({
@@ -49,6 +52,8 @@ function CreateCategoryDialog({type}: Props) {
            toast.success(`Category ${data.name} created successfully 🎉`, {
                 id: "create-category",
            });
+
+           successCallback(data);
 
            await queryClient.invalidateQueries({
             queryKey: ["categories"],
@@ -115,10 +120,10 @@ function CreateCategoryDialog({type}: Props) {
                                 Name
                             </FormLabel>
                             <FormControl>
-                                <Input defaultValue={""} {...field} />
+                                <Input placeholder='Category' {...field} />
                             </FormControl>
                             <FormDescription>
-                                Transaction description (optional)
+                                This is how your category will be displayed.
                             </FormDescription>
                         </FormItem>
                     )}
@@ -168,6 +173,7 @@ function CreateCategoryDialog({type}: Props) {
                                     </PopoverTrigger>
                                     <PopoverContent className="w-full">
                                             <Picker data={data}
+                                            theme={theme.resolvedTheme}
                                             onEmojiSelect={(emoji:{native:string}) => {
                                                 field.onChange(emoji.native);
                                             }}

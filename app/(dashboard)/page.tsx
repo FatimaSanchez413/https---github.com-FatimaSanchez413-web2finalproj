@@ -46,7 +46,7 @@ async function page() {
             <CreateTransactionDialog trigger = {
             <Button variant={"outline"} className="border-rose-500
                       bg-rose-950 text-white hover:bg-rose-700
-                      hover:text-white ml-7 ">
+                      hover:text-white ml-7 mr-12 ">
                       New Expense 💸
                   </Button> }
                   type="Expense"
