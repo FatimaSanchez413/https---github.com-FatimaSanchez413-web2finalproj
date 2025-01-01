@@ -10,7 +10,7 @@ generator client {
 
 datasource db {
   provider = "sqlite"
-  url      = "file:./dev.db"
+  url      = env("DATABASE_URL")
 }
 
 model UserSettings {
@@ -38,7 +38,6 @@ model Transaction{
   date          DateTime
   userId        String
   type          String  @default("Earnings")
-
   category      String
   categoryIcon  String
 }
